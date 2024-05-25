@@ -1,5 +1,5 @@
-# goit-advancedjs-hw-01
+# goit-advancedjs-hw-02
 
-This repo contains homework 1 for advancedjs course.
+This repo contains homework 2 for advancedjs course.
 
 Original repo template [Readme](./Template-README.md).
