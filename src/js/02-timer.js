@@ -1,5 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 const refs = {
   days: document.querySelector('span[data-days]'),
@@ -19,7 +21,13 @@ const flatpickrOptions = {
     console.log(selectedDates[0]);
     refs.startButton.disabled = false;
     if (selectedDates[0] < new Date()) {
-      window.alert('Please choose a date in the future');
+      iziToast.error({
+        title: 'Error',
+        message: 'Please choose a date in the future',
+        position: 'center',
+        timeout: 2500,
+        closeOnClick: true,
+      });
       selectedDates[0] = new Date();
       refs.startButton.disabled = true;
     }
@@ -43,6 +51,13 @@ function onStartButtonClick() {
   timerId = setInterval(() => {
     if (deltaTime() <= 0) {
       clearInterval(timerId);
+      iziToast.success({
+        title: 'Success',
+        message: 'Time is up!',
+        position: 'center',
+        timeout: 5000,
+        closeOnClick: true,
+      });
       return;
     }
     timerUpdate(deltaTime());
