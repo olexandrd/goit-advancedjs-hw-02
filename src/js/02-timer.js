@@ -17,15 +17,17 @@ const flatpickrOptions = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
+    refs.startButton.disabled = false;
     if (selectedDates[0] < new Date()) {
       window.alert('Please choose a date in the future');
+      selectedDates[0] = new Date();
+      refs.startButton.disabled = true;
     }
-    refs.startButton.disabled = false;
+    this.config.clickOpens = false;
     initialSetTimer();
   },
 };
 const flatpickrDate = flatpickr(refs.dateInput, flatpickrOptions);
-
 refs.startButton.disabled = true;
 refs.startButton.addEventListener('click', onStartButtonClick);
 
@@ -37,6 +39,7 @@ function deltaTime() {
 
 function onStartButtonClick() {
   refs.startButton.disabled = true;
+  refs.dateInput.disabled = true;
   timerId = setInterval(() => {
     if (deltaTime() <= 0) {
       clearInterval(timerId);
